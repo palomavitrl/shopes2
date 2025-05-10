@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagamento</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-sm">
+  <header class="flex items-center p-4 border-b">
+    <button onclick="history.back()" class="text-red-500 font-family mr-3"><span class="text-3xl">🡐</span></button>
+    <h1 class="text-lg font-semibold">Pagamento</h1>
+  </header>
+
+  <main class="p-4 max-w-md mx-auto">
+    <div class="bg-gray-100 rounded p-4 mb-4">
+      <div class="flex justify-between mb-2">
+        <span class="font-semibold">Pagamento Total</span>
+        <span class="text-red-500 font-bold">R$39,90</span>
+      </div>
+      <div class="text-sm text-gray-700">
+        <p class="text-red-500" id="timer">Carregando...</p>
+        <p id="vencimento" class="text-gray-500"></p>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <img src="https://artpoin.com/wp-content/uploads/2023/09/artpoin-logo-pix.png" alt="Pix" class="h-6 w-6">
+        <span class="font-semibold">Pix</span>
+      </div>
+
+      <div class="bg-gray-100 rounded p-4">
+        <p class="mb-2 font-semibold">Código Pix</p>
+        <input type="text" readonly value="00020101021226850014br.gov.bcb.pix088.756.133-03" class="w-full p-2 border rounded bg-white text-gray-700 text-xs" id="pixCode">
+        <button onclick="copiarPix()" class="w-full mt-3 bg-white text-red-500 border border-red-500 py-2 rounded font-gray-700">Copiar Código Pix</button>
+      </div>
+    </div>
+
+    <div class="text-gray-700 text-sm">
+      <p class="mb-1">① Copie o código Pix acima.</p>
+      <p class="mb-1">② Acesse o app do seu banco ou internet banking de preferência.</p>
+      <p class="mb-1">③ Escolha pagar com o Pix, cole o código e finalize o pagamento.</p>
+      <p class="mb-1">④ Seu pagamento será aprovado em alguns segundos.</p>
+    </div>
+
+    <button onclick="location.href='/'" class="mt-6 w-full bg-orange-600 text-white py-2 rounded font-bold">OK</button>
+  </main>
+
+  <script>
+    function copiarPix() {
+      const input = document.getElementById('pixCode');
+      input.select();
+      document.execCommand('copy');
+      alert('Código Pix copiado!');
+    }
+
+    const timerElement = document.getElementById('timer');
+    const vencimentoElement = document.getElementById('vencimento');
+
+    const DURACAO = 24 * 60 * 60 * 1000; // 24 horas em ms
+    let deadline = new Date(Date.now() + DURACAO);
+
+    function atualizarTimer() {
+      const agora = new Date();
+      const diff = deadline - agora;
+
+      if (diff <= 0) {
+        deadline = new Date(Date.now() + DURACAO);
+      }
+
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      timerElement.textContent = ${horas} horas ${minutos} minutos ${segundos} segundos;
+
+      // Atualiza o vencimento visual (opcional)
+      const dataVencimento = new Date(deadline);
+      vencimentoElement.textContent = Vencimento em ${dataVencimento.toLocaleDateString('pt-BR')} às ${dataVencimento.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })};
+    }
+
+    setInterval(atualizarTimer, 1000);
+    atualizarTimer();
+  </script>
+</body>
+<footer class="bg-gray border-t text-gray-700 text-xs mt-8">
+  <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Atendimento ao Cliente</h4>
+      <ul class="space-y-1">
+        <li>Central de Ajuda</li>
+        <li>Como Comprar</li>
+        <li>Métodos de Pagamento</li>
+        <li>Garantia Shopee</li>
+        <li>Devolução e Reembolso</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Sobre a Shopee</h4>
+      <ul class="space-y-1">
+        <li>Sobre Nós</li>
+        <li>Políticas Shopee</li>
+        <li>Política de Privacidade</li>
+        <li>Programas de Afiliados</li>
+        <li>Shopee Blog</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Pagamento</h4>
+      <div class="flex flex-wrap gap-2">
+        <img src="visa-17.png" alt="Visa" class="w-10 h-6 object-contain">
+        <img src="Mastercard Symbol - PNG - BR/Artwork/Mastercard Symbol Mark 45px PNG/mc_symbol_opt_45_1x.png" alt="Mastercard" class="w-10 h-6 object-contain">
+        <img src="pngegg.png" alt="Amex" class="w-10 h-6 object-contain">
+        <img src="pngwing.com (2).png" alt="PayPal" class="w-10 h-6 object-contain">
+      </div>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Siga-nos</h4>
+      <ul class="space-y-1">
+        <li class="flex items-center gap-2">
+          <img src="icons8-facebook-novo-30.png" alt="Facebook" class="w-4 h-4"> Facebook
+        </li>
+        <li class="flex items-center gap-2">
+          <img src="icons8-instagram-30.png" alt="Instagram" class="w-4 h-4"> Instagram
+        </li>
+        <li class="flex items-center gap-2">
+          <img src="icons8-tiktok-logo-30.png" alt="TikTok" class="w-4 h-4"> TikTok
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="bg-white py-4 border-t text-gray-500">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+        <div>© 2025 Shopee. Todos os direitos reservados.</div>
+        <div class="text-sm">
+            País e região:
+            <span>Singapura</span> |
+            <span>Indonésia</span> |
+            <span>Tailândia</span> |
+            <span>Malásia</span> |
+            <span>Vietnã</span> |
+            <span>Filipinas</span> |
+            <span>Brasil</span> |
+            <span>México</span> |
+            <span>Colômbia</span> |
+            <span>Chile</span> |
+            <span>Taiwan</span>
+        </div>
+    </div>
+</div>
+
+</footer>
+</body>
+</html>

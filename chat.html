@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat com Vendedor - NEZUKO COMÉRCIO DE VARIEDADES</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Botão de voltar (só com a seta laranja) -->
+  <div class="p-4">
+    <button onclick="window.history.back()" class="text-orange-500">
+      <img src="https://img.icons8.com/ios-filled/50/000000/left.png" alt="Seta Voltar" class="w-6 h-6" />
+    </button>
+  </div>
+
+  <section class="w-full max-w-3xl mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
+    <div class="flex justify-between items-center mb-4 relative">
+      <h2 class="text-2xl font-semibold">Chat com Vendedor</h2>
+      
+      <!-- Botões lado a lado -->
+      <div class="flex items-center space-x-2">
+        <!-- Três pontinhos -->
+        <button id="menuBtn" class="text-orange-500 focus:outline-none">
+          <img src="https://img.icons8.com/ios-filled/24/ffa500/menu-2.png" alt="Menu" class="w-6 h-6" />
+        </button>
+        <!-- Botão fechar -->
+        <button id="closeChat" class="text-gray-500 text-xl">×</button>
+      </div>
+
+      <!-- Caixa flutuante do menu -->
+      <div id="menuBox" class="hidden absolute right-10 top-10 bg-white shadow-lg rounded-lg p-2 w-52 z-50">
+        <button class="flex items-center w-full text-left text-gray-700 hover:bg-gray-100 px-2 py-1 rounded">
+          <img src="notificacao.png" alt="Mute" class="w-4 h-4 mr-2" /> Mute
+        </button>
+        <button class="flex items-center w-full text-left text-gray-700 hover:bg-gray-100 px-2 py-1 rounded">
+          <img src="bloqueado.png" alt="Bloquear" class="w-4 h-4 mr-2" /> Bloquear chat
+        </button>
+        <button class="flex items-center w-full text-left text-gray-700 hover:bg-gray-100 px-2 py-1 rounded">
+          <img src="em-formacao.png" alt="Denunciar" class="w-4 h-4 mr-2" /> Denunciar esse usuário
+        </button>
+        <button class="flex items-center w-full text-left text-gray-700 hover:bg-gray-100 px-2 py-1 rounded">
+          <img src="icons8-megafone-50.png" alt="Bloquear promoções" class="w-4 h-4 mr-2" /> Bloquear promoções
+        </button>
+        <button class="flex items-center w-full text-left text-gray-700 hover:bg-gray-100 px-2 py-1 rounded">
+          <img src="icons8-ajuda-50.png" alt="Ajuda" class="w-4 h-4 mr-2" /> Precisa de ajuda?
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensagem do vendedor -->
+    <div class="flex items-start mb-4">
+      <img src="https://down-tx-br.img.susercontent.com/br-11134216-7r98o-m0pd6iefthgg47_tn.webp" alt="Foto da loja" class="w-12 h-12 rounded-full border-2 border-gray-300 mr-3">
+      <div class="bg-gray-100 text-gray-800 p-3 rounded-lg max-w-xs">
+        <p class="text-sm">
+          <strong>Nezuko Variedades</strong> <br>Olá! 😊 Notei que tem interesse no produto, mas ainda não finalizou a compra. <br>
+          Se precisar de ajuda, estou por aqui! 📦 <br>
+          Lembre-se de que o estoque é limitado. Não perca essa oportunidade! 🔔 <br>
+          Estou à disposição! 👍
+        </p>
+      </div>
+    </div>
+
+    <!-- Botão de Avaliar Atendimento (sem sublinhado, acima da caixa de mensagem) -->
+    <div class="mb-2 flex items-center justify-start">
+        <button id="avaliarAtendimento" class="flex items-center text-sm text-orange-500">
+          <img src="papel.png" alt="Avaliar" class="w-5 h-5 mr-2" />
+          Avaliar Atendimento
+        </button>
+      </div>
+    <!-- Aviso de avaliação -->
+    <p id="aviso" class="hidden text-sm text-red-500 mt-2">
+      Você não conversou com um agente ao vivo nas últimas 24 horas.
+    </p>
+
+    <!-- Caixa de chat (para mensagens do usuário) -->
+    <div id="chatContent" class="overflow-y-auto h-60 mb-4">
+      <!-- Mensagens do usuário e vendedor aparecerão aqui -->
+    </div>
+
+    <!-- Botão + e campo de texto lado a lado -->
+    <div class="flex items-center space-x-2 mb-2">
+      <button id="addFileBtn" class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center text-2xl focus:outline-none">
+        +
+      </button>
+      <input type="file" id="fileInput" class="hidden" />
+      <input type="text" id="chatInput" class="flex-1 px-4 py-2 border rounded-lg" placeholder="Digite sua mensagem..." />
+    </div>
+
+    <button id="sendMessage" class="mt-2 bg-orange-500 text-white px-4 py-1 rounded font-semibold w-full">Enviar</button>
+  </section>
+
+  <script>
+    // Fechar o chat (simular retorno à loja ou outra página)
+    document.getElementById('closeChat').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+
+    // Enviar mensagem (simulação)
+    document.getElementById('sendMessage').addEventListener('click', function() {
+      const message = document.getElementById('chatInput').value;
+      if (message.trim() !== '') {
+        const chatContent = document.getElementById('chatContent');
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('mb-2');
+        newMessage.textContent = message;
+        chatContent.appendChild(newMessage);
+        document.getElementById('chatInput').value = '';
+      }
+    });
+
+    // Mostrar aviso ao clicar em "Avaliar Atendimento"
+    document.getElementById('avaliarAtendimento').addEventListener('click', function() {
+      document.getElementById('aviso').classList.remove('hidden');
+    });
+
+    // Alternar exibição da caixa de menu
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      const menuBox = document.getElementById('menuBox');
+      menuBox.classList.toggle('hidden');
+    });
+
+    // Fechar o menu se clicar fora
+    document.addEventListener('click', function(event) {
+      const menuBox = document.getElementById('menuBox');
+      const menuBtn = document.getElementById('menuBtn');
+      if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
+        menuBox.classList.add('hidden');
+      }
+    });
+
+    // Clique no botão + abre seletor de arquivos
+    document.getElementById('addFileBtn').addEventListener('click', function() {
+      document.getElementById('fileInput').click();
+    });
+
+    // Mostrar nome do arquivo selecionado (opcional)
+    document.getElementById('fileInput').addEventListener('change', function() {
+      if (this.files.length > 0) {
+        alert('Arquivo selecionado: ' + this.files[0].name);
+      }
+    });
+  </script>
+
+</body>
+</html>

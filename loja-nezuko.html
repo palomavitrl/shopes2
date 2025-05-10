@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEZUKO COMÉRCIO DE VARIEDADES</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+  
+  
+
+  <!-- Capa da loja -->
+  <section class="relative">
+    <img src="https://c.pxhere.com/photos/19/68/sunset_sun_sky_cloud_red_fire_in_the_evening_orange-1085894.jpg!d" alt="" class="w-full h-48 object-cover">
+    <div class="absolute top-5 left-4 flex items-start">
+      <div class="absolute top-0 left-[220%] transform -translate-x-[60%] w-[45rem]">
+        <input type="text" placeholder="Buscar na loja..." class="w-full px-5 py-2 bg-transparent border border-gray text-white placeholder-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
+      </div>
+      
+      
+      
+      <img src="https://down-tx-br.img.susercontent.com/br-11134216-7r98o-m0pd6iefthgg47_tn.webp" alt="Logo Nezuko" class="w-14 h-14 rounded-full border-2 border-white">
+      <div class="ml-3 text-white">
+        <h2 class="text-lg font-bold">NEZUKO COMÉRCIO DE VARIEDADES</h2>
+        <div class="flex items-center text-sm mb-1">
+          <span class="mr-2">★ 4.8</span>
+          <span>1,5mil Seguidores</span>
+        </div>
+        <div class="flex gap-2">
+          <button id="seguirBtn" class="bg-orange-500 text-white px-4 py-1 rounded font-semibold">Seguir</button>
+          
+<!-- Botão Chat -->
+<button id="chatBtn" class="bg-transparent border-2 border-gray-300 text-white px-4 py-1 rounded font-semibold hover:bg-gray-100 focus:outline-none" onclick="window.location.href='chat.html'">Chat</button>
+
+        </div>
+        
+        <!-- Caixa de Chat (oculta inicialmente) -->
+        <div id="chatBox" class="hidden absolute top-20 left-1/2 transform -translate-x-1/2 w-96 h-64 bg-white shadow-lg rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="text-lg font-bold">Chat com a loja</h3>
+            <button id="closeChat" class="text-gray-500">&times;</button>
+          </div>
+          <div id="chatContent" class="overflow-y-auto h-48 mb-2">
+            <!-- Mensagens aparecerão aqui -->
+          </div>
+          <input type="text" id="chatInput" class="w-full px-4 py-2 border rounded-lg" placeholder="Digite sua mensagem..." />
+          <button id="sendMessage" class="mt-2 bg-orange-500 text-white px-4 py-1 rounded font-semibold w-full">Enviar</button>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+ <!-- Navegação da loja -->
+ <nav class="mt-5 bg-white shadow">
+  <div class="flex justify-around text-sm font-medium text-gray-700 border-b">
+    <style>
+      .body {
+    background-color: #ffffff !important; /* ou a cor da outra página */
+  }
+      .filtros-topo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background: #ffffff;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .filtros-topo div {
+        cursor: pointer;
+        position: relative;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .filtros-topo div:hover {
+        background-color: #f9f9f9;
+      }
+
+      .caixa-flutuante {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        padding: 10px;
+        z-index: 1000;
+        width: 200px;
+      }
+
+      .item-flutuante {
+        margin-bottom: 8px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+      }
+
+      .item-flutuante:last-child {
+        margin-bottom: 0;
+      }
+
+      .icone-produto {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      .quantidade {
+        font-size: 12px;
+        color: gray;
+        margin-left: 5px;
+      
+      }
+      
+
+    </style>
+
+    <div class="filtros-topo">
+      <div onclick="toggleCaixa('mais-vendidos')">
+        Mais vendidos
+        <div class="caixa-flutuante" id="caixa-mais-vendidos">
+          <div class="item-flutuante">Escorredor Pro Five</div>
+          <div class="item-flutuante">Escorredor De Louça Cozinha Suspensa</div>
+          <div class="item-flutuante">Organizador De Guarda Roupa</div>
+        </div>
+      </div>
+
+      <div onclick="toggleCaixa('categorias')">
+        Categorias
+        <div class="caixa-flutuante" id="caixa-categorias">
+          <div class="item-flutuante">
+            <img src="https://http2.mlstatic.com/D_NQ_NP_836294-MLB77195383846_072024-O.webp" alt="Escorredores de Louça" class="icone-produto">
+            Escorredores de Louça
+            <span class="quantidade">(6)</span>
+          </div>
+          <div class="item-flutuante">
+            <img src="https://a-static.mlcdn.com.br/1500x1500/estante-prateleira-aco-inox-4-andares-914-cm-x-457-cm-x-161-cm-250-kg-seville-classics/giftcenter/5435p/3a834e4f84c1d4a6647734ee19cb2eb8.jpg" alt="Prateleiras e Racks" class="icone-produto">
+            Prateleiras e Racks
+            <span class="quantidade">(4)</span>
+          </div>
+          <div class="item-flutuante">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81m24ocJIcL._AC_SL1500_.jpg" alt="Organizadores de Guarda-roupa" class="icone-produto">
+            Organizadores de Guarda-roupa
+            <span class="quantidade">(2)</span>
+          </div>
+          <div class="item-flutuante">
+            <img src="https://cdn.shopify.com/s/files/1/0693/0454/9668/products/ac15b8ae42435f11c6799224582129ba_1080x_fb867e7e-bd33-4203-91af-1d87a1db1de9_800x.jpg?v=1672579774" alt="Guarda-roupas" class="icone-produto">
+            Guarda-roupas
+            <span class="quantidade">(1)</span>
+          </div>
+          <div class="item-flutuante">
+            <img src="https://www.masterboxembalagens.com/images/virtuemart/product/caixa-cartonada-brinde-25x22x10mm-laranja-papelao-rigido.jpg" alt="Produtos" class="icone-produto">
+            Produtos
+            <span class="quantidade">(19)</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        Preço <span class="setas">⇵</span>
+      </div>
+    </div>
+  </div>
+</nav>
+  
+  <script>
+    function toggleCaixa(id) {
+      const caixas = ['caixa-mais-vendidos', 'caixa-categorias'];
+      caixas.forEach(caixaId => {
+        if (caixaId === 'caixa-' + id) {
+          const caixa = document.getElementById(caixaId);
+          // Alterna (abre/fecha) se já estiver aberta
+          caixa.style.display = (caixa.style.display === 'block') ? 'none' : 'block';
+        } else {
+          // Fecha as outras caixas
+          document.getElementById(caixaId).style.display = 'none';
+        }
+      });
+    }
+  
+    // Opcional: fecha todas as caixas se clicar fora
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.filtros-topo div')) {
+        ['caixa-mais-vendidos', 'caixa-categorias'].forEach(caixaId => {
+          document.getElementById(caixaId).style.display = 'none';
+        });
+      }
+    });
+  </script>
+  
+
+  <!-- Lista de produtos -->
+  <section class="p-4 grid grid-cols-2 gap-4 bg-gray-100">
+    <div class="bg-white rounded shadow p-2">
+      <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-m5e2gbr37891d6.webp" alt="Escorredor" class="w-full h-40 object-cover rounded">
+      <h3 class="text-sm mt-2 font-medium">Escorredor De Louça Cozinha Suspensa Modula A...</h3>
+      <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+      <p class="text-sm text-gray-500">★ 4.9 | 1.8mil Vendido(s)</p>
+    </div>
+
+    <div class="bg-white rounded shadow p-2">
+      <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-m4ren4w659s1df.webp" alt="Rack" class="w-full h-40 object-cover rounded">
+      <h3 class="text-sm mt-2 font-medium">Organizador De Guarda Roupa Autosuste...</h3>
+      <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+      <p class="text-sm text-gray-500">★ 4.5 | 230 Vendido(s)</p>
+    </div>
+
+    <div class="bg-white rounded shadow p-2">
+      <img src="https://down-br.img.susercontent.com/file/sg-11134201-7rcd3-m6ca6ivz96jc1d.webp"  alt="Armário Preto" class="w-full h-40 object-cover rounded">
+      <h3 class="text-sm mt-2 font-medium">Guarda Roupa Prático</h3>
+      <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+      <p class="text-sm text-gray-500">★ 4.3 | 67 Vendido(s)</p>
+    </div>
+
+    <div class="bg-white rounded shadow p-2">
+      <img src="https://racks.lk/wp-content/uploads/2021/11/IMG_5488-2-1024x1024.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+      <h3 class="text-sm mt-2 font-medium">Rack Compartimentos </h3>
+      <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+      <p class="text-sm text-gray-500">★ 4.5 | 45 Vendido(s)</p>
+    </div>
+  
+  
+  <div class="bg-white rounded shadow p-2">
+    <img src="https://http2.mlstatic.com/D_NQ_NP_615897-MLB52799625934_122022-O.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+    <h3 class="text-sm mt-2 font-medium">Organizador De Guarda Roupa Estilo Japonês</h3>
+    <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+    <p class="text-sm text-gray-500">★ 4.7 | 38 Vendido(s)</p>
+  </div>
+
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://img1.madeiramadeira.com.br/product/images/42412697-rack-para-tv-ate-50-polegadas-3-portas-londres-madesa-7891760804808-1_zoom-1500x1500.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Rack moderno Branco</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.9 | 27 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://images.tcdn.com.br/img/img_prod/709978/escorredor_de_louca_veneza_2_andares_9_pratos_preto_duplo_com_porta_talheres_e_bandeja_coletora_remo_609_1_422f476244ed3069e6721994cd0e62fd.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Escorredor de Louça Veneza</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.6 | 205 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://img.elo7.com.br/product/zoom/48E9E24/kit-prateleira-industrial-lux-completo-com-prateleiras-prateleiras-industrial.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Kit Prateleira Industrial</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.8 | 99 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/351917636/images/12a0268d-b07d-4887-83ce-992992329e4f02911401006717899085137779.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Escorredor Prato Louça Aéreo</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.9 | 68 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://images.madeiramadeira.com.br/product/images/74902921-prateleira-decorativa-bpl-26-06-nature-brv-moveis354930-1-5_zoom-1500x1500.jpg" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Prateleira 3 Nichos 5 Ganchos</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.5 | 301 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/3702613/images/5d289fbe-ea51-44e5-bbdf-83b8f7c23a4brtesanaluai04414422500x357.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Paneleiro Escorredor de 1m </h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.8 | 98 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/864476/images/9e471962-8a55-4e27-9a8e-6dfa04386c6eio80cmmel1695322208200zoom.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Prato Giratório para Mesa de Jantar 80cm Mel</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.8 | 93 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/788267471/images/a30f6ae2-ff1e-47b6-8066-2af8c5f3bd4e913094fe4f9c3d13a1dfc0a774.png?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Kit 12 Utensílios de Cozinha em Silicone e Cabo de Madeira Resistente Ao Calor </h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.9 | 37 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/2095698/images/a2af7d5c-f641-41da-afb0-d9dfbadb563323478526portatemperoscondimentos9potesvidrosuporteacopreto0635627621600x600.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Porta Temperos Condimentos 9 Potes Vidro Suporte Aço Preto</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.7 | 58 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/511319928/images/65231612-7559-4ade-a585-ef3d7cbe6bb638985539379KTESP500BCF536.jpeg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Conjunto para Pia Cozinha Lixeira 4,7 Porta Detergente Escorredor Branco Branco</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.4 | 157 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/910108/images/efaf435d-3dca-4e5c-b2ac-023636be55a5estampado1716557422200zoom.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Almofada Canto Alemão 2x1 Lugares - Par Estampado</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.8 | 123 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/1888422/images/f67ef3b7-ed9a-48be-97c6-5469f38e90c275060452kit8portaretratospainelparedepretosku8639241600x600.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Kit 8 Porta Retratos Painel Parede Preto</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.9 | 113 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/387070714/images/7c09872d-43ae-431d-8331-c4dd638311de38074398bc98fb28a48c9d349b.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Jogo de Cama Lençol 4 Peças Queen com Elástico Estampado 158x198x30cm Bf Colchões Bege</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.7 | 95 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://product-hub-prd.madeiramadeira.com.br/867626/images/be035ded-4ba8-4fd7-82fd-7b2e9c8df74a46e894ea2d04717a7a55867626.jpg?width=700&canvas=1:1&bg-color=FFF" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Tapete 200x250cm New Colors Outdoor Tapetes São Carlos Studio</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.9 | 84 Vendido(s)</p>
+</div>
+
+<div class="bg-white rounded shadow p-2">
+  <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-m8eugm1fubch24.webp" alt="Armário Branco" class="w-full h-40 object-cover rounded">
+  <h3 class="text-sm mt-2 font-medium">Cadeira Escritório Giratória</h3>
+  <p class="text-red-600 font-bold mt-1">Produto esgotado</p>
+  <p class="text-sm text-gray-500">★ 4.8 | 107 Vendido(s)</p>
+</div>
+</section>
+
+  <!-- Script para seguir com localStorage -->
+  <script>
+    const btn = document.getElementById("seguirBtn");
+
+    function atualizarBotao(estadoSeguindo) {
+      if (estadoSeguindo) {
+        btn.textContent = "Seguindo";
+        btn.classList.remove("bg-orange-500");
+        btn.classList.add("bg-transparent");
+      } else {
+        btn.textContent = "Seguir";
+        btn.classList.remove("bg-transparent");
+        btn.classList.add("bg-orange-500");
+      }
+    }
+
+    // Checar estado salvo
+    const seguindoSalvo = localStorage.getItem("seguindo") === "true";
+    atualizarBotao(seguindoSalvo);
+
+    // Ao clicar
+    btn.addEventListener("click", () => {
+      const seguindoAgora = btn.textContent !== "Seguindo";
+      atualizarBotao(seguindoAgora);
+      localStorage.setItem("seguindo", seguindoAgora);
+    });
+  </script>
+
+
+<footer class="bg-gray border-t text-gray-700 text-xs mt-8">
+  <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Atendimento ao Cliente</h4>
+      <ul class="space-y-1">
+        <li>Central de Ajuda</li>
+        <li>Como Comprar</li>
+        <li>Métodos de Pagamento</li>
+        <li>Garantia Shopee</li>
+        <li>Devolução e Reembolso</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Sobre a Shopee</h4>
+      <ul class="space-y-1">
+        <li>Sobre Nós</li>
+        <li>Políticas Shopee</li>
+        <li>Política de Privacidade</li>
+        <li>Programas de Afiliados</li>
+        <li>Shopee Blog</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Pagamento</h4>
+      <div class="flex flex-wrap gap-2">
+        <img src="visa-17.png" alt="Visa" class="w-10 h-6 object-contain">
+        <img src="Mastercard Symbol - PNG - BR/Artwork/Mastercard Symbol Mark 45px PNG/mc_symbol_opt_45_1x.png" alt="Mastercard" class="w-10 h-6 object-contain">
+        <img src="pngegg.png" alt="Amex" class="w-10 h-6 object-contain">
+        <img src="pngwing.com (2).png" alt="PayPal" class="w-10 h-6 object-contain">
+      </div>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Siga-nos</h4>
+      <ul class="space-y-1">
+        <li class="flex items-center gap-2">
+          <img src="icons8-facebook-novo-30.png" alt="Facebook" class="w-4 h-4"> Facebook
+        </li>
+        <li class="flex items-center gap-2">
+          <img src="icons8-instagram-30.png" alt="Instagram" class="w-4 h-4"> Instagram
+        </li>
+        <li class="flex items-center gap-2">
+          <img src="icons8-tiktok-logo-30.png" alt="TikTok" class="w-4 h-4"> TikTok
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="bg-white py-4 border-t text-gray-500">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+        <div>© 2025 Shopee. Todos os direitos reservados.</div>
+        <div class="text-sm">
+            País e região:
+            <span>Singapura</span> |
+            <span>Indonésia</span> |
+            <span>Tailândia</span> |
+            <span>Malásia</span> |
+            <span>Vietnã</span> |
+            <span>Filipinas</span> |
+            <span>Brasil</span> |
+            <span>México</span> |
+            <span>Colômbia</span> |
+            <span>Chile</span> |
+            <span>Taiwan</span>
+        </div>
+    </div>
+</div>
+
+</footer>
+</body>
+</html>

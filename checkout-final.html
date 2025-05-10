@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finalizar Compra - Escorredor Pro Five</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-sm">
+
+  <!-- Cabeçalho semelhante ao checkout anterior -->
+  <header class="bg-white shadow p-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <img src="https://i0.wp.com/reviewkolagen.com/wp-content/uploads/2020/01/shopee.png?fit=750%2C750&ssl=1" class="h-8">
+      <span class="font-bold text-lg text-red-500">Shopee</span>
+    </div>
+    <div class="text-gray-700">Confirmação do Pedido</div>
+  </header>
+
+  <main class="max-w-2xl mx-auto p-4 bg-white mt-4 rounded shadow-md">
+    <div class="mb-4">
+        <h3 class="font-semibold mb-1"><span style="display: inline-flex; align-items: center;">
+          <img src="C:\Users\amola\Downloads\pngwing.com.png" alt="ícone" style="width: 12px; height: 15px; margin-right: 4px;">
+        Endereço de entrega</h3></span>
+        <input type="text" class="w-full p-2 border rounded text-gray-700" placeholder="Digite seu endereço completo" />
+      </div>
+  </main>
+
+  <main class="max-w-2xl mx-auto p-4 bg-white mt-4 rounded shadow-md">
+    <!-- Produto -->
+    <div class="flex gap-4 items-start mb-4 border-b pb-4">
+      <img src="https://http2.mlstatic.com/D_NQ_NP_633430-MLB79218902110_092024-O.webp" class="w-24 h-24 object-cover rounded" alt="Escorredor">
+      <div>
+        <h2 class="font-semibold text-base">Escorredor Pro Five De Louça Cozinha Suspensa</h2>
+        <p class="text-gray-600 mt-1">Vendido por: NEZUKO COMÉRCIO DE VARIEDADES</p>
+        <p class="text-red-500 font-bold mt-2">R$39,90</p>
+        <p class="text-xs text-green-600">Cupom aplicado com sucesso</p>
+      </div>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="font-semibold mb-1">Mensagem para o vendedor</h3>
+        <textarea class="w-full p-2 border rounded" rows="3" placeholder="Digite aqui uma mensagem para o vendedor (opcional)"></textarea>
+    </div>
+
+   <!-- Envio -->
+<div class="mb-4 rounded-lg p-3 shadow-sm" style="border: 1px solid #7ee0d1; border-left: 5px solid #30cfc1; background-color: #f0fdfa;">
+  <h3 class="font-semibold mb-1">Opção de envio</h3>
+  <p class="text-gray-700">Entrega padrão - Grátis</p>
+  <p class="text-xs text-green-600">Cupom de frete aplicado</p>
+</div>
+  </main>
+
+  <main class="max-w-2xl mx-auto p-4 bg-white mt-4 rounded shadow-md">
+    <!-- Pagamento -->
+    <div class="mb-4">
+      <h3 class="font-semibold mb-2">Método de pagamento</h3>
+      <div class="space-y-2">
+        <label class="flex items-center gap-2">
+          <input type="radio" name="pagamento" value="cartao">
+          <span><span style="display: inline-flex; align-items: center;">
+            <img src="cartao.png" alt="ícone" style="width: 20px; height: 20px; margin-right: 4px;">
+            Cartão de crédito (até 12x)</span></span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="pagamento" value="pix">
+          <span><span style="display: inline-flex; align-items: center;">
+            <img src="https://artpoin.com/wp-content/uploads/2023/09/artpoin-logo-pix.png" alt="ícone" style="width: 15px; height: 22px; margin-right: 4px;">
+            Pix - Pagamento instantâneo</span></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Resumo -->
+    <div class="bg-gray-50 border p-4 rounded mb-4">
+      <h3 class="font-semibold mb-2">Detalhes de pagamento</h3>
+      <div class="flex justify-between">
+        <span>Itens (1)</span>
+        <span>R$39,90</span>
+      </div>
+      <div class="flex justify-between text-green-600">
+        <span>Frete (com cupom)</span>
+        <span>Grátis</span>
+      </div>
+      <div class="flex justify-between text-yellow-600">
+        <span>Descontos aplicados</span>
+        <span>-R$0,00</span>
+      </div>
+      <hr class="my-2">
+      <div class="flex justify-between font-bold text-lg">
+        <span>Total</span>
+        <span class="text-red-500">R$39,90</span>
+      </div>
+    </div>
+
+    <button onclick="finalizarPedido()" class="w-full bg-red-500 text-white font-bold py-2 rounded">
+      Finalizar Pedido
+    </button>
+  </main>
+
+  <script>
+    function finalizarPedido() {
+      const metodo = document.querySelector('input[name="pagamento"]:checked');
+      if (metodo) {
+        if (metodo.value === "pix") {
+          window.location.href = "pagamento-pix.html";
+        } else if (metodo.value === "cartao") {
+          window.location.href = "pagamento-cartao.html";
+        }
+      } else {
+        alert("Por favor, selecione um método de pagamento.");
+      }
+    }
+  </script>
+
+</body>
+<footer class="bg-gray border-t text-gray-700 text-xs mt-8">
+  <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Atendimento ao Cliente</h4>
+      <ul class="space-y-1">
+        <li>Central de Ajuda</li>
+        <li>Como Comprar</li>
+        <li>Métodos de Pagamento</li>
+        <li>Garantia Shopee</li>
+        <li>Devolução e Reembolso</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Sobre a Shopee</h4>
+      <ul class="space-y-1">
+        <li>Sobre Nós</li>
+        <li>Políticas Shopee</li>
+        <li>Política de Privacidade</li>
+        <li>Programas de Afiliados</li>
+        <li>Shopee Blog</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Pagamento</h4>
+      <div class="flex flex-wrap gap-2">
+        <img src="visa-17.png" alt="Visa" class="w-10 h-6 object-contain">
+        <img src="Mastercard Symbol - PNG - BR/Artwork/Mastercard Symbol Mark 45px PNG/mc_symbol_opt_45_1x.png" alt="Mastercard" class="w-10 h-6 object-contain">
+        <img src="pngegg.png" alt="Amex" class="w-10 h-6 object-contain">
+        <img src="pngwing.com (2).png" alt="PayPal" class="w-10 h-6 object-contain">
+      </div>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-black">Siga-nos</h4>
+      <ul class="space-y-1">
+        <li class="flex items-center gap-2">
+          <img src="icons8-facebook-novo-30.png" alt="Facebook" class="w-4 h-4"> Facebook
+        </li>
+        <li class="flex items-center gap-2">
+          <img src="icons8-instagram-30.png" alt="Instagram" class="w-4 h-4"> Instagram
+        </li>
+        <li class="flex items-center gap-2">
+          <img src="icons8-tiktok-logo-30.png" alt="TikTok" class="w-4 h-4"> TikTok
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="bg-white py-4 border-t text-gray-500">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+        <div>© 2025 Shopee. Todos os direitos reservados.</div>
+        <div class="text-sm">
+            País e região:
+            <span>Singapura</span> |
+            <span>Indonésia</span> |
+            <span>Tailândia</span> |
+            <span>Malásia</span> |
+            <span>Vietnã</span> |
+            <span>Filipinas</span> |
+            <span>Brasil</span> |
+            <span>México</span> |
+            <span>Colômbia</span> |
+            <span>Chile</span> |
+            <span>Taiwan</span>
+        </div>
+    </div>
+</div>
+
+</footer>
+</body>
+</html>
